@@ -28,7 +28,7 @@ class Bot:
         if self.session is None:
             return False
 
-        id, name, status = self.getLastApplicationId()
+        id, name, status, requestNo = self.getLastApplicationId()
         if "Requested approval" not in status:
             return status
 
@@ -36,8 +36,7 @@ class Bot:
         html = self.getCertificate(id)
 
         import os
-        outputPath = os.path.join(outputFolder, f'CATT_{name}.pdf')
-
+        outputPath = os.path.join(outputFolder, f'CATT_{requestNo}.pdf')
         self.savePdf(html, outputPath)
         self.close()
 
@@ -59,11 +58,14 @@ class Bot:
             'rap_id_drone': href[1],
             'register_id': href[2]
         }
+        requestNo = cols[0].div.string.splitlines()
+        requestNo = ''.join(requestNo)
         name = cols[2].div.string.splitlines()
         name = ''.join(name)
         status = cols[5].div.decode_contents().splitlines()
         status = ''.join(status)
-        return id, name, status
+        
+        return id, name, status, requestNo
 
     def getCertificate(self, id):
         payload = id
