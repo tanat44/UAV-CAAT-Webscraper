@@ -3,3 +3,6 @@
 test data/*
 *.vscode/*
 *__pycache__/*
+build/*
+build
+dist/main/*

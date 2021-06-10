@@ -16,3 +16,7 @@ Usage / Legality is not guarantee in any cases.
 - Some of the static files, such as .css/.ttf/images are downloaded and modified to serve the purpose
 - "pdfkit" library for rendering and save pdf
 - "wkhtmltopdf" separate installation is neccessary to make "pdfkit" work
+
+## Notes on development
+- Create binaries and automatic copy asset folder
+    > pyinstaller main.spec

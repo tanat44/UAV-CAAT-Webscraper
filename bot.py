@@ -10,14 +10,19 @@ class Bot:
             'tpass': password
         }
         self.session = requests.Session()
-        response = self.session.post('https://uav.caat.or.th/search_member.php', headers=headers, data=payload)
-        self.cookie = response.cookies.get_dict()
-
-        if response.status_code != 200:
-            print('cannot login')
+        response = None
+        try:
+            response = self.session.post('https://uav.caat.or.th/search_member.php', headers=headers, data=payload)
+            soup = BeautifulSoup(response.text, 'html.parser')
+            error = soup.find('input', {'type': 'hidden', 'name': 'wrong'})
+            if error is not None:
+                self.close()
+                return
+        except:
             self.session = None
-        
-        print('Login success')
+            return
+    
+        self.cookie = response.cookies.get_dict()
 
     def runPipeline(self, outputFolder=""):
         if self.session is None:
@@ -96,6 +101,7 @@ class Bot:
     def close(self):
         self.session.get('https://uav.caat.or.th/logout.php')
         self.session.close()
+        self.session = None
 
 
 # # get signature
