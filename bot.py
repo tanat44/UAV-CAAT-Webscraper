@@ -96,7 +96,9 @@ class Bot:
             'encoding': "UTF-8",
             'quiet': None,
         }
-        pdfkit.from_string(html, filepath, options=options) 
+        wkPath = os.path.join(dir_path, 'bin/wkhtmltopdf.exe')
+        config = pdfkit.configuration(wkhtmltopdf=wkPath)
+        pdfkit.from_string(html, filepath, options=options, configuration=config) 
 
     def close(self):
         self.session.get('https://uav.caat.or.th/logout.php')

@@ -6,7 +6,7 @@ import datetime
 import sys
 
 if __name__ == "__main__":
-
+    
     filename = 'test data/in.csv'
     if len(sys.argv) == 2:
         filename = sys.argv[1]

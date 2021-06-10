@@ -15,7 +15,7 @@ Usage / Legality is not guarantee in any cases.
 - "beautifulsoup" library for inspecting HTML tag / attributes, injecting some styling as neccessary
 - Some of the static files, such as .css/.ttf/images are downloaded and modified to serve the purpose
 - "pdfkit" library for rendering and save pdf
-- "wkhtmltopdf" separate installation is neccessary to make "pdfkit" work
+- "wkhtmltopdf.exe" is packaged with the distribution. No separate installation is required.
 
 ## Notes on development
 - Create binaries and automatic copy asset folder
