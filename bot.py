@@ -49,15 +49,20 @@ class Bot:
         soup = BeautifulSoup(response.text, 'html.parser')
         firstRow = soup.tbody.find('tr')
         cols = firstRow.findAll('td')
-        href = cols[6].a['href'].split(';')
-        href = href[0]
-        href = href.replace('(','')
-        href = href.replace(')','')
-        href = href.split(',')
         id = {
-            'rap_id_drone': href[1],
-            'register_id': href[2]
-        }
+                'rap_id_drone': None,
+                'register_id': None
+            }
+        if cols[6].a is not None:
+            href = cols[6].a['href'].split(';')
+            href = href[0]
+            href = href.replace('(','')
+            href = href.replace(')','')
+            href = href.split(',')
+            id = {
+                'rap_id_drone': href[1],
+                'register_id': href[2]
+            }
         requestNo = cols[0].div.string.splitlines()
         requestNo = ''.join(requestNo)
         name = cols[2].div.string.splitlines()
